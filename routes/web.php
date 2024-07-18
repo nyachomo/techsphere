@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //COMPANY SETTINGS
 Route::get('/settings',[App\Http\Controllers\CompanySettingController::class,'showcompanySettings'])->name('showcompanySettings');
@@ -28,12 +29,17 @@ Route::post('/update/settings/info',[App\Http\Controllers\CompanySettingControll
 Route::post('/delete/settings',[App\Http\Controllers\CompanySettingController::class,'deletecompanySettings'])->name('deletecompanySettings');
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//ADMIN MANAGING STUDENT
+Route::get('/showStudents',[App\Http\Controllers\StudentController::class, 'showStudents'])->name('showStudents');
+Route::post('/addStudent',[App\Http\Controllers\StudentController::class, 'addStudent'])->name('addStudent');
+Route::post('/updateStudent',[App\Http\Controllers\StudentController::class, 'updateStudent'])->name('updateStudent');
+
+
 
 Route::get('/admin-schools-index', [App\Http\Controllers\SchoolController::class, 'index'])->name('admin.school.index');
 
 Route::get('/admin-students', [App\Http\Controllers\StudentController::class, 'index'])->name('admin.student.index');
-
 Route::post('/students', [App\Http\Controllers\StudentController::class, 'store'])->name('admin.student.store');
 Route::GET('/fetch-students', [App\Http\Controllers\StudentController::class, 'fetchstudent'])->name('admin.student.fetchstudent');
 Route::GET('/edit-student/{id}', [App\Http\Controllers\StudentController::class, 'editstudent'])->name('admin.student.editstudent');

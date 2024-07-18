@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\ProfessionalSummary;
 use App\Models\StudentSkill;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 
@@ -19,12 +21,52 @@ class StudentController extends Controller
 {
     //
 
-    public function __invoke(Request $request)
-    {
-        // Controller logic here
+    
 
 
+    public function showStudents(){
+      $courses=Course::all();
+      $students=Student::with('course')->orderBy('id','DESC')->get();
+      if($courses->count()>0){
+        return view('admin.students.showStudents',compact(['courses','students']));
+      }else{
+        alert()->error('Failed to load','Courses are missing');
+        return redirect()->back();
+      }
+     
     }
+
+
+    public function addStudent(Request $request){
+        $request->validate([
+          'student_admno'=>'unique:students',
+          'student_email'=>'unique:students',
+          'student_phone'=>'unique:students',
+        ]);
+        $save=Student::create($request->all());
+        if($save){
+          Alert::toast('Success','success');
+          return redirect()->back();
+        }else{
+          alert()->error('Failed','Could  not Update');
+          return redirect()->back();
+        }
+    }
+
+    public function updateStudent(Request $request){
+      $id=$request->id;
+      
+      $update=Student::find($id)->update($request->all());
+      if($update){
+        Alert::toast('Success','success');
+        return redirect()->back();
+      }else{
+        alert()->error('Failed','Could  not Update');
+        return redirect()->back();
+      }
+  }
+
+
 
 
 
@@ -113,7 +155,7 @@ class StudentController extends Controller
 
 
     //update student
-    public function updatestudent(Request $request,$id){
+    public function update1student(Request $request,$id){
 
         $validator=Validator::make($request->all(),[
             'name'=>'required|max:191',

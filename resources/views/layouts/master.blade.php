@@ -328,6 +328,13 @@
             @endif
       
         @if(!Auth::user())
+
+            <li class="nav-item">
+                    <a href="{{route('showStudents')}}" class="nav-link">
+                      <i class="nav-icon fas fa-users las1"></i><p>STUDENTS</p>
+                    </a>
+            </li>
+
           <li class="nav-item has-treeview ">
               <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>

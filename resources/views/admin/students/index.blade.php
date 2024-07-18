@@ -309,8 +309,6 @@ $enrolcourses = Course::whereIn('id', $uniqueCourseIds)->get();
        //add data to database
         $(document).on('click','.add_student',function (e){
            e.preventDefault();
-           
-          
            var data={
             'name':$('.name').val(),
             'email':$('.email').val(),
