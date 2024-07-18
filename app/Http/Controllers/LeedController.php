@@ -29,10 +29,10 @@ class LeedController extends Controller
 
         $save=Leed::create($request->all());
         if($save){
-            Alert::toast('Data saved successfully', 'success');
+            alert()->success('Success','Data saved successfully');
             return redirect()->back();
         }else{
-            alert()->error('Data saved successfully', 'success');
+            alert()->error('Failed', 'Could not saved');
             return redirect()->back();
         }
     }
@@ -41,7 +41,14 @@ class LeedController extends Controller
     public function updateLeed(Request $request){
         $id=$request->id;
         $leed=Leed::find($id);
-        $leed->update($request->all());
+        $update->$leed->update($request->all());
+        if($update){
+            alert()->success('Success','Data has been updated successfully');
+            return redirect()->back();
+        }else{
+            alert()->error('Data saved successfully', 'success');
+            return redirect()->back();
+        }
     }
 
 }
