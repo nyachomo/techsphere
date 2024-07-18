@@ -272,7 +272,7 @@ $(document).ready(function(){
             let status=$('.status').val(); 
 
             $.ajax({
-                url:"/addUser",
+                url:"{{route('admin.adduser')}}",
                 method:"post",
                 data:{
                     name:name,
