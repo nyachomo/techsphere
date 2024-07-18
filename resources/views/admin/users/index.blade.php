@@ -307,7 +307,7 @@ $(document).ready(function(){
        function fetchusers(){
              $.ajax({
               type:'GET',
-              url:"/fetchusers",
+              url:"{{route('admin.fetchusers')}}",
               dataType:"json",
               success:function(response){
                  //console.log(response.students);
