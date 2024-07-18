@@ -41,7 +41,7 @@ class LeedController extends Controller
     public function updateLeed(Request $request){
         $id=$request->id;
         $leed=Leed::find($id);
-        $update->$leed->update($request->all());
+        $update=$leed->update($request->all());
         if($update){
             alert()->success('Success','Data has been updated successfully');
             return redirect()->back();
